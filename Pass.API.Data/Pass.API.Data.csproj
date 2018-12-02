@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\Pass.API.Service\Pass.API.Service.csproj" />
   </ItemGroup>
 
 </Project>

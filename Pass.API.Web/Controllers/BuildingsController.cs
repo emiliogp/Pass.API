@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Pass.API.Service;
+using Pass.API.Model;
+using Pass.API.Business;
 
 namespace Pass.API.Controllers
 {
@@ -11,11 +14,20 @@ namespace Pass.API.Controllers
     [ApiController]
     public class BuildingsController : ControllerBase
     {
+        private readonly IBuildingRepository _repository;
+        private readonly VisitManager _visitManager;
+
+        public BuildingsController(IBuildingRepository repository, VisitManager visitManager)
+        {
+            _repository = repository;
+            _visitManager = visitManager;
+        }
+
         // GET: api/Buildings
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<BuildingDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _repository.GetAll();
         }
 
         // GET: api/Buildings/5
@@ -41,6 +53,13 @@ namespace Pass.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        // GET: api/buildings/test
+        [HttpGet("test", Name = "Test")]
+        public string Test(int id)
+        {
+            return _repository.test();
         }
     }
 }
