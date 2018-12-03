@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using Pass.API.Service;
+using Pass.API.Interfaces;
 using Pass.API.Data.Models;
 using Pass.API.Model;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +24,7 @@ namespace Pass.API.Data.Repositories
             return _context.Building.Count().ToString();
         }
 
-        public IEnumerable<BuildingDTO> GetAll()
+        public IEnumerable<IEntityDTO> GetAll()
         {
             List<BuildingDTO> buildings = new List<BuildingDTO>();
             foreach (Building b in _context.Building)

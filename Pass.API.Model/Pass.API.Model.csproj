@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Pass.API.Service\Pass.API.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>

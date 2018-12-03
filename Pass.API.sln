@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pass.API.Model", "Pass.API.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pass.API.Data", "Pass.API.Data\Pass.API.Data.csproj", "{11A5A636-D684-4A0C-BCC4-07E7460AAA08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pass.API.Service", "Pass.API.Service\Pass.API.Service.csproj", "{39EAC51D-D1E6-4FFC-BD40-BA36EB2EE114}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pass.API.Interfaces", "Pass.API.Service\Pass.API.Interfaces.csproj", "{39EAC51D-D1E6-4FFC-BD40-BA36EB2EE114}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pass.API.Business", "Pass.API.Business\Pass.API.Business.csproj", "{35A75A64-CEC0-4A30-8E40-A5D19909F11D}"
 EndProject

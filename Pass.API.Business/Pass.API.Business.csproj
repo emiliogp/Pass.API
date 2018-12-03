@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Pass.API.Service\Pass.API.Service.csproj" />
+    <ProjectReference Include="..\Pass.API.Service\Pass.API.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

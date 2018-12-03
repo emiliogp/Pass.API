@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Pass.API.Service;
+using Pass.API.Interfaces;
 
 namespace Pass.API.Business
 {
     public class VisitManager
     {
-        private IBuildingRepository _buidingRepository;
+        private IEntityRepository _buidingRepository;
 
-        public VisitManager(IBuildingRepository buildingRepository)
+        public VisitManager(IEntityRepository buildingRepository)
         {
             _buidingRepository = buildingRepository;
         }

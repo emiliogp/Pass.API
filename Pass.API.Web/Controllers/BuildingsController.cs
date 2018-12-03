@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Pass.API.Service;
+using Pass.API.Interfaces;
 using Pass.API.Model;
 using Pass.API.Business;
 
@@ -27,7 +27,7 @@ namespace Pass.API.Controllers
         [HttpGet]
         public IEnumerable<BuildingDTO> Get()
         {
-            return _repository.GetAll();
+            return _repository.GetAll().Cast<BuildingDTO>();
         }
 
         // GET: api/Buildings/5

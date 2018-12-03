@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Pass.API.Service\Pass.API.Service.csproj" />
+    <ProjectReference Include="..\Pass.API.Model\Pass.API.Model.csproj" />
+    <ProjectReference Include="..\Pass.API.Service\Pass.API.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

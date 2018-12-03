@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Pass.API.Interfaces
 {
-    public interface IBuildingRepository : IEntityRepository
+    public interface IEntityDTO
     {
+        int Id { get; set; }
     }
 }

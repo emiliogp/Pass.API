@@ -12,7 +12,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Pass.API.Data.Models;
 using Pass.API.Data.Repositories;
-using Pass.API.Service;
+using Pass.API.Interfaces;
 using Pass.API.Business;
 
 
@@ -33,6 +33,7 @@ namespace Pass.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<PassContext>(options => options.UseSqlServer("Server=VM-DESARROLLO\\SQLEXPRESS;Database=Pass;Trusted_Connection=True;"));
             services.AddTransient<IBuildingRepository, BuildingRepository>();
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             services.AddTransient<VisitManager>();
         }
 
