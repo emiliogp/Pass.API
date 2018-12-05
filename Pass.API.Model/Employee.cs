@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Pass.API.Interfaces;
+using Pass.API.Interfaces.Entities;
 
 namespace Pass.API.Model
 {
-    public class EmployeeDTO : IEntityDTO
+    public class EmployeeDTO : IEmployee
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

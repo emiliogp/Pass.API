@@ -12,7 +12,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Pass.API.Data.Models;
 using Pass.API.Data.Repositories;
-using Pass.API.Interfaces;
+using Pass.API.Interfaces.Repositories;
 using Pass.API.Business;
 
 

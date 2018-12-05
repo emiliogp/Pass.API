@@ -7,6 +7,8 @@ using Pass.API.Data.Models;
 using Pass.API.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Pass.API.Interfaces.Entities;
+using Pass.API.Interfaces.Repositories;
 
 namespace Pass.API.Data.Repositories
 {
@@ -24,7 +26,7 @@ namespace Pass.API.Data.Repositories
             return _context.Employee.Count().ToString();
         }
 
-        public IEnumerable<IEntityDTO> GetAll()
+        public IEnumerable<IEntity> GetAll()
         {
             List<EmployeeDTO> Employees = new List<EmployeeDTO>();
             foreach (Employee e in _context.Employee)
@@ -40,6 +42,25 @@ namespace Pass.API.Data.Repositories
             }
 
             return Employees;
+        }
+
+        public IEntity GetById(int Id)
+        {
+            Employee e = _context.Employee.Where(em => em.EmployeeKey == Id).FirstOrDefault();
+            EmployeeDTO employee = null;
+            if (e != null)
+            {
+                employee = new EmployeeDTO();
+                employee.Id = e.EmployeeKey;
+                employee.FirstName = e.FirstName;
+                employee.LastName = e.LastName;
+                employee.Email = e.Email;
+                employee.NetworkId = e.NetworkId;
+                employee.Job = e.Job;
+
+            }
+
+            return employee;
         }
     }
 }

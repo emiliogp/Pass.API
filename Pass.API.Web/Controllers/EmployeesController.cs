@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pass.API.Model;
-using Pass.API.Interfaces;
+using Pass.API.Interfaces.Repositories;
 
 namespace Pass.API.Web.Controllers
 {

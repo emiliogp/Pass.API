@@ -7,6 +7,8 @@ using Pass.API.Data.Models;
 using Pass.API.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Pass.API.Interfaces.Entities;
+using Pass.API.Interfaces.Repositories;
 
 namespace Pass.API.Data.Repositories
 {
@@ -24,7 +26,7 @@ namespace Pass.API.Data.Repositories
             return _context.Building.Count().ToString();
         }
 
-        public IEnumerable<IEntityDTO> GetAll()
+        public IEnumerable<IEntity> GetAll()
         {
             List<BuildingDTO> buildings = new List<BuildingDTO>();
             foreach (Building b in _context.Building)
@@ -36,6 +38,20 @@ namespace Pass.API.Data.Repositories
             }
 
             return buildings;
+        }
+
+        public IEntity GetById(int Id)
+        {
+            Building b =_context.Building.Where(bu => bu.BuildinKey == Id).FirstOrDefault();
+            BuildingDTO building = null;
+            if (b != null)
+            {
+                building = new BuildingDTO();
+                building.Id = b.BuildinKey;
+                building.Name = b.Name;
+            }
+
+            return building;
         }
     }
 }

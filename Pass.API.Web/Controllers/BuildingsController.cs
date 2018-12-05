@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pass.API.Interfaces;
 using Pass.API.Model;
 using Pass.API.Business;
+using Pass.API.Interfaces.Repositories;
 
 namespace Pass.API.Controllers
 {
@@ -55,11 +56,6 @@ namespace Pass.API.Controllers
         {
         }
 
-        // GET: api/buildings/test
-        [HttpGet("test", Name = "Test")]
-        public string Test(int id)
-        {
-            return _repository.test();
-        }
+       
     }
 }
