@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Pass.API.Data.Models
 {
-    public partial class Building
+    public partial class BuildingEntity
     {
-        public Building()
+        public BuildingEntity()
         {
-            Visit = new HashSet<Visit>();
+            Visit = new HashSet<VisitEntity>();
         }
 
-        public int BuildinKey { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Visit> Visit { get; set; }
+        public ICollection<VisitEntity> Visit { get; set; }
     }
 }

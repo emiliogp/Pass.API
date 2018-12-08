@@ -2,7 +2,7 @@
 
 namespace Pass.API.Data
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {

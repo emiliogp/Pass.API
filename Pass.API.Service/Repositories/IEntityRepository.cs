@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Pass.API.Interfaces.Entities;
+﻿using System.Collections.Generic;
 
 namespace Pass.API.Interfaces.Repositories
 {
     /// <summary>
     /// Contains methods common to all entities
     /// </summary>
-    public interface IEntityRepository
+    public interface IEntityRepository<T>
     {        
 
-        IEnumerable<IEntity> GetAll();
+        IEnumerable<T> GetAll();
 
-        IEntity GetById(int Id);
+        T GetById(int Id);
 
     }
 }

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using Pass.API.Model;
-using Pass.API.Interfaces.Repositories;
-using Pass.API.Interfaces.Entities;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Pass.API.Business.Domain;
 using Pass.API.Data.Models;
+using Pass.API.Interfaces.Entities;
+using Pass.API.Interfaces.Repositories;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace Pass.API.Data.Repositories
@@ -13,53 +13,30 @@ namespace Pass.API.Data.Repositories
     public class VisitRepository : IVisitRepository
     {
         private PassContext _context;
+        private readonly IMapper _mapper;
 
-        public VisitRepository(PassContext context)
+        public VisitRepository(PassContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public IEnumerable<IEntity> GetAll()
+        public IEnumerable<IVisit> GetAll()
         {
-            List<VisitDTO> Visits = new List<VisitDTO>();
-            foreach (Visit v in _context.Visit)
+            List<Visit> Visits = new List<Visit>();
+            foreach (VisitEntity v in _context.Visits)
             {
-                VisitDTO visit = new VisitDTO();
-
-                VisitStatus vs = v.StatusNavigation;
-                VisitStatusDTO visitStatus = new VisitStatusDTO();
-                visitStatus.Id = vs.StatusKey;
-                visitStatus.Name = vs.Name;
-
-                visit.Id = v.VisitId;
-                visit.Status = visitStatus;
-                visit.StartDate = v.StartDate;
-                visit.EndDate = v.EndDate;
-                Visits.Add(visit);
+                Visits.Add(_mapper.Map<Visit>(v));                
             }
 
             return Visits;
         }
 
 
-        public IEntity GetById(int Id)
+        public IVisit GetById(int Id)
         {
-            Visit v = _context.Visit.Where(vi => vi.VisitId == Id).FirstOrDefault();
-            VisitDTO visit = null;
-            if (v != null)
-            {
-                VisitStatus vs = v.StatusNavigation;
-                VisitStatusDTO visitStatus = new VisitStatusDTO();
-                visitStatus.Id = vs.StatusKey;
-                visitStatus.Name = vs.Name;
-
-                visit.Id = v.VisitId;
-                visit.Status = visitStatus;
-                visit.StartDate = v.StartDate;
-                visit.EndDate = v.EndDate;
-            }
-
-            return visit;
+            VisitEntity v = _context.Visits.Include(vi => vi.Status).Where(vi => vi.Id == Id).FirstOrDefault();
+            return _mapper.Map<Visit>(v);
         }
     }
 }

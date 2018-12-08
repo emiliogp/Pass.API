@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pass.API.Data.Models
+﻿namespace Pass.API.Data.Models
 {
-    public partial class VisitVisitor
+    public partial class VisitVisitorEntity
     {
         public int Visit { get; set; }
         public int Visitor { get; set; }
 
-        public Visit VisitNavigation { get; set; }
-        public Visitor VisitorNavigation { get; set; }
+        public VisitEntity VisitNavigation { get; set; }
+        public VisitorEntity VisitorNavigation { get; set; }
     }
 }

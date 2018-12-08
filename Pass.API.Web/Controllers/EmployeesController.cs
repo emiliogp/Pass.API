@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Pass.API.Model;
-using Pass.API.Interfaces.Repositories;
+using Pass.API.Business;
+using Pass.API.Business.Domain;
+using Pass.API.Web.Models;
+using System.Collections.Generic;
 
 namespace Pass.API.Web.Controllers
 {
@@ -13,18 +11,20 @@ namespace Pass.API.Web.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly IEmployeeRepository _repository;
+        private readonly VisitManager _visitManager;
+        private readonly IMapper _mapper;
 
-        public EmployeesController(IEmployeeRepository repository)
+        public EmployeesController(VisitManager visitManager, IMapper mapper)
         {
-            _repository = repository;
+            _visitManager = visitManager;
+            _mapper = mapper;
         }
 
         // GET: api/Buildings
         [HttpGet]
         public IEnumerable<EmployeeDTO> Get()
         {
-            return _repository.GetAll().Cast<EmployeeDTO>();
+            return _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDTO>>(_visitManager.loadAllEmployees());
         }
     }
 }

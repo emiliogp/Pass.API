@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Pass.API.Data.Models
 {
@@ -15,35 +13,35 @@ namespace Pass.API.Data.Models
         {
         }
 
-        public virtual DbSet<Building> Building { get; set; }
-        public virtual DbSet<Employee> Employee { get; set; }
-        public virtual DbSet<Visit> Visit { get; set; }
-        public virtual DbSet<VisitHistory> VisitHistory { get; set; }
-        public virtual DbSet<Visitor> Visitor { get; set; }
-        public virtual DbSet<VisitStatus> VisitStatus { get; set; }
-        public virtual DbSet<VisitVisitor> VisitVisitor { get; set; }
+        public virtual DbSet<BuildingEntity> Buildings { get; set; }
+        public virtual DbSet<EmployeeEntity> Employee { get; set; }
+        public virtual DbSet<VisitEntity> Visits { get; set; }
+        public virtual DbSet<VisitHistoryEntity> VisitHistory { get; set; }
+        public virtual DbSet<VisitorEntity> Visitors { get; set; }
+        public virtual DbSet<VisitStatusEntity> VisitStatus { get; set; }
+        public virtual DbSet<VisitVisitorEntity> VisitVisitor { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                optionsBuilder.UseSqlServer("Server=VM-DESARROLLO\\SQLEXPRESS;Database=Pass;Trusted_Connection=True;");
+//            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Building>(entity =>
+            modelBuilder.Entity<BuildingEntity>(entity =>
             {
-                entity.HasKey(e => e.BuildinKey);
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Employee>(entity =>
+            modelBuilder.Entity<EmployeeEntity>(entity =>
             {
-                entity.HasKey(e => e.EmployeeKey);
-
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasMaxLength(200)
@@ -69,7 +67,7 @@ namespace Pass.API.Data.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Visit>(entity =>
+            modelBuilder.Entity<VisitEntity>(entity =>
             {
                 entity.Property(e => e.Comments).IsUnicode(false);
 
@@ -104,10 +102,8 @@ namespace Pass.API.Data.Models
                     .HasConstraintName("FK_Visit_Employee");
             });
 
-            modelBuilder.Entity<VisitHistory>(entity =>
+            modelBuilder.Entity<VisitHistoryEntity>(entity =>
             {
-                entity.HasKey(e => e.VisitHistoryKey);
-
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
                 entity.HasOne(d => d.VisitNavigation)
@@ -117,10 +113,8 @@ namespace Pass.API.Data.Models
                     .HasConstraintName("FK_VisitHistory_Visit");
             });
 
-            modelBuilder.Entity<Visitor>(entity =>
+            modelBuilder.Entity<VisitorEntity>(entity =>
             {
-                entity.HasKey(e => e.VisitorKey);
-
                 entity.Property(e => e.Comments).IsUnicode(false);
 
                 entity.Property(e => e.Company)
@@ -143,17 +137,15 @@ namespace Pass.API.Data.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<VisitStatus>(entity =>
+            modelBuilder.Entity<VisitStatusEntity>(entity =>
             {
-                entity.HasKey(e => e.StatusKey);
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(25)
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<VisitVisitor>(entity =>
+            modelBuilder.Entity<VisitVisitorEntity>(entity =>
             {
                 entity.HasKey(e => new { e.Visit, e.Visitor });
 

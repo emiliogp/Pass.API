@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Pass.API.Service\Pass.API.Interfaces.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\" />
+  </ItemGroup>
+
 </Project>

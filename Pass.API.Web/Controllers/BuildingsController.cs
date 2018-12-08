@@ -1,13 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Pass.API.Business;
+using Pass.API.Business.Domain;
+using Pass.API.Interfaces.Repositories;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Pass.API.Interfaces;
-using Pass.API.Model;
-using Pass.API.Business;
-using Pass.API.Interfaces.Repositories;
 
 namespace Pass.API.Controllers
 {
@@ -26,9 +22,9 @@ namespace Pass.API.Controllers
 
         // GET: api/Buildings
         [HttpGet]
-        public IEnumerable<BuildingDTO> Get()
+        public IEnumerable<Building> Get()
         {
-            return _repository.GetAll().Cast<BuildingDTO>();
+            return _repository.GetAll().Cast<Building>();
         }
 
         // GET: api/Buildings/5

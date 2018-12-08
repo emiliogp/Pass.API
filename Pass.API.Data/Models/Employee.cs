@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Pass.API.Data.Models
 {
-    public partial class Employee
+    public partial class EmployeeEntity
     {
-        public Employee()
+        public EmployeeEntity()
         {
-            VisitCreatedByNavigation = new HashSet<Visit>();
-            VisitVisitedPersonNavigation = new HashSet<Visit>();
+            VisitCreatedByNavigation = new HashSet<VisitEntity>();
+            VisitVisitedPersonNavigation = new HashSet<VisitEntity>();
         }
 
-        public int EmployeeKey { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string NetworkId { get; set; }
         public string Job { get; set; }
 
-        public ICollection<Visit> VisitCreatedByNavigation { get; set; }
-        public ICollection<Visit> VisitVisitedPersonNavigation { get; set; }
+        public ICollection<VisitEntity> VisitCreatedByNavigation { get; set; }
+        public ICollection<VisitEntity> VisitVisitedPersonNavigation { get; set; }
     }
 }

@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using Pass.API.Interfaces;
+﻿using AutoMapper;
+using Pass.API.Business.Domain;
 using Pass.API.Data.Models;
-using Pass.API.Model;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Pass.API.Interfaces.Entities;
 using Pass.API.Interfaces.Repositories;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Pass.API.Data.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
         private PassContext _context;
+        private readonly IMapper _mapper;
 
-        public EmployeeRepository(PassContext context)
+        public EmployeeRepository(PassContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public string test()
@@ -26,41 +24,21 @@ namespace Pass.API.Data.Repositories
             return _context.Employee.Count().ToString();
         }
 
-        public IEnumerable<IEntity> GetAll()
+        public IEnumerable<IEmployee> GetAll()
         {
-            List<EmployeeDTO> Employees = new List<EmployeeDTO>();
-            foreach (Employee e in _context.Employee)
+            List<Employee> Employees = new List<Employee>();
+            foreach (EmployeeEntity e in _context.Employee)
             {
-                EmployeeDTO Employee = new EmployeeDTO();
-                Employee.Id = e.EmployeeKey;
-                Employee.FirstName = e.FirstName;
-                Employee.LastName = e.LastName;
-                Employee.Email = e.Email;
-                Employee.NetworkId = e.NetworkId;
-                Employee.Job = e.Job;
-                Employees.Add(Employee);
+                Employees.Add(_mapper.Map<Employee>(e));
             }
 
             return Employees;
         }
 
-        public IEntity GetById(int Id)
+        public IEmployee GetById(int Id)
         {
-            Employee e = _context.Employee.Where(em => em.EmployeeKey == Id).FirstOrDefault();
-            EmployeeDTO employee = null;
-            if (e != null)
-            {
-                employee = new EmployeeDTO();
-                employee.Id = e.EmployeeKey;
-                employee.FirstName = e.FirstName;
-                employee.LastName = e.LastName;
-                employee.Email = e.Email;
-                employee.NetworkId = e.NetworkId;
-                employee.Job = e.Job;
-
-            }
-
-            return employee;
+            EmployeeEntity e = _context.Employee.Where(em => em.Id == Id).FirstOrDefault();
+            return _mapper.Map<Employee>(e);
         }
     }
 }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace Pass.API.Data.Models
 {
-    public partial class Visit
+    public partial class VisitEntity
     {
-        public Visit()
+        public VisitEntity()
         {
-            VisitHistory = new HashSet<VisitHistory>();
-            VisitVisitor = new HashSet<VisitVisitor>();
+            VisitHistory = new HashSet<VisitHistoryEntity>();
+            VisitVisitor = new HashSet<VisitVisitorEntity>();
         }
 
-        public int VisitId { get; set; }
+        public int Id { get; set; }
         public int Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -22,11 +22,11 @@ namespace Pass.API.Data.Models
         public DateTime CreatedOn { get; set; }
         public bool Deleted { get; set; }
 
-        public Building BuildingNavigation { get; set; }
-        public Employee CreatedByNavigation { get; set; }
-        public VisitStatus StatusNavigation { get; set; }
-        public Employee VisitedPersonNavigation { get; set; }
-        public ICollection<VisitHistory> VisitHistory { get; set; }
-        public ICollection<VisitVisitor> VisitVisitor { get; set; }
+        public BuildingEntity BuildingNavigation { get; set; }
+        public EmployeeEntity CreatedByNavigation { get; set; }
+        public VisitStatusEntity StatusNavigation { get; set; }
+        public EmployeeEntity VisitedPersonNavigation { get; set; }
+        public ICollection<VisitHistoryEntity> VisitHistory { get; set; }
+        public ICollection<VisitVisitorEntity> VisitVisitor { get; set; }
     }
 }

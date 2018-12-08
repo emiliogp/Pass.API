@@ -1,57 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using Pass.API.Interfaces;
+﻿using AutoMapper;
+using Pass.API.Business.Domain;
 using Pass.API.Data.Models;
-using Pass.API.Model;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Pass.API.Interfaces.Entities;
 using Pass.API.Interfaces.Repositories;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Pass.API.Data.Repositories
 {
     public class BuildingRepository : IBuildingRepository
     {
         private PassContext _context;
+        private readonly IMapper _mapper;
 
-        public BuildingRepository(PassContext context)
+
+
+        public BuildingRepository(PassContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public string test()
         {
-            return _context.Building.Count().ToString();
+            return _context.Buildings.Count().ToString();
         }
 
-        public IEnumerable<IEntity> GetAll()
+        public IEnumerable<IBuilding> GetAll()
         {
-            List<BuildingDTO> buildings = new List<BuildingDTO>();
-            foreach (Building b in _context.Building)
+            var buildings = new List<Building>();
+            foreach (BuildingEntity b in _context.Buildings)
             {
-                BuildingDTO building = new BuildingDTO();
-                building.Id = b.BuildinKey;
-                building.Name = b.Name;
-                buildings.Add(building);
+                buildings.Add(_mapper.Map<Building>(b));
             }
 
             return buildings;
         }
 
-        public IEntity GetById(int Id)
+        public IBuilding GetById(int Id)
         {
-            Building b =_context.Building.Where(bu => bu.BuildinKey == Id).FirstOrDefault();
-            BuildingDTO building = null;
-            if (b != null)
-            {
-                building = new BuildingDTO();
-                building.Id = b.BuildinKey;
-                building.Name = b.Name;
-            }
-
-            return building;
+            BuildingEntity b =_context.Buildings.Where(bu => bu.Id == Id).FirstOrDefault();
+            return _mapper.Map<Building>(b);
         }
     }
 }

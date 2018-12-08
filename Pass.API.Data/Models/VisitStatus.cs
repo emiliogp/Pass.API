@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Pass.API.Data.Models
 {
-    public partial class VisitStatus
+    public partial class VisitStatusEntity
     {
-        public VisitStatus()
+        public VisitStatusEntity()
         {
-            Visit = new HashSet<Visit>();
+            Visit = new HashSet<VisitEntity>();
         }
 
-        public int StatusKey { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Visit> Visit { get; set; }
+        public ICollection<VisitEntity> Visit { get; set; }
     }
 }
