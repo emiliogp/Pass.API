@@ -13,11 +13,11 @@ namespace Pass.API.Data.Models
         {
         }
 
-        public virtual DbSet<BuildingEntity> Buildings { get; set; }
+        public virtual DbSet<BuildingEntity> Building { get; set; }
         public virtual DbSet<EmployeeEntity> Employee { get; set; }
-        public virtual DbSet<VisitEntity> Visits { get; set; }
+        public virtual DbSet<VisitEntity> Visit { get; set; }
         public virtual DbSet<VisitHistoryEntity> VisitHistory { get; set; }
-        public virtual DbSet<VisitorEntity> Visitors { get; set; }
+        public virtual DbSet<VisitorEntity> Visitor { get; set; }
         public virtual DbSet<VisitStatusEntity> VisitStatus { get; set; }
         public virtual DbSet<VisitVisitorEntity> VisitVisitor { get; set; }
 

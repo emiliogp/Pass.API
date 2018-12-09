@@ -23,23 +23,24 @@ namespace Pass.API.Data.Repositories
 
         public string test()
         {
-            return _context.Buildings.Count().ToString();
+            return _context.Building.Count().ToString();
         }
 
-        public IEnumerable<IBuilding> GetAll()
+        public IEnumerable<IBuilding> GetAll(int? count)
         {
-            var buildings = new List<Building>();
-            foreach (BuildingEntity b in _context.Buildings)
+            var buildings = _context.Building.Where(_ => true);
+            if (count.HasValue)
             {
-                buildings.Add(_mapper.Map<Building>(b));
+                buildings = buildings.Take(count.Value);
             }
+            buildings = buildings.OrderBy(v => v.Name);
 
-            return buildings;
+            return buildings.Select(v => _mapper.Map<Building>(v));
         }
 
         public IBuilding GetById(int Id)
         {
-            BuildingEntity b =_context.Buildings.Where(bu => bu.Id == Id).FirstOrDefault();
+            BuildingEntity b =_context.Building.Where(bu => bu.Id == Id).FirstOrDefault();
             return _mapper.Map<Building>(b);
         }
     }

@@ -19,20 +19,27 @@ namespace Pass.API.Data.Repositories
             _mapper = mapper;
         }
 
-        public string test()
+        public IEnumerable<IEmployee> GetAll(int? count)
         {
-            return _context.Employee.Count().ToString();
+            var foundEmployees = _context.Employee.Where(_ => true);
+            if (count.HasValue)
+            {
+                foundEmployees = foundEmployees.Take(count.Value);
+            }
+            foundEmployees = foundEmployees.OrderBy(e => e.LastName).ThenBy(e => e.FirstName);
+
+            return foundEmployees.Select(e => _mapper.Map<Employee>(e));
         }
 
-        public IEnumerable<IEmployee> GetAll()
-        {
-            List<Employee> Employees = new List<Employee>();
-            foreach (EmployeeEntity e in _context.Employee)
-            {
-                Employees.Add(_mapper.Map<Employee>(e));
+        public IEnumerable<IEmployee> GetByLastName(string filter, int? count)
+        {            
+            var foundEmployees = _context.Employee.Where(e => e.LastName.StartsWith(filter));
+            if(count.HasValue) {
+                foundEmployees = foundEmployees.Take(count.Value);
             }
+            foundEmployees = foundEmployees.OrderBy(e => e.LastName).ThenBy(e => e.FirstName);
 
-            return Employees;
+            return foundEmployees.Select(e => _mapper.Map<Employee>(e));
         }
 
         public IEmployee GetById(int Id)

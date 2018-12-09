@@ -21,22 +21,34 @@ namespace Pass.API.Data.Repositories
             _mapper = mapper;
         }
 
-        public IEnumerable<IVisit> GetAll()
+        public IEnumerable<IVisit> GetAll(int? count)
         {
-            List<Visit> Visits = new List<Visit>();
-            foreach (VisitEntity v in _context.Visits)
+            var visits = Includify(_context.Visit).Where(_ => true);
+            if (count.HasValue)
             {
-                Visits.Add(_mapper.Map<Visit>(v));                
+                visits = visits.Take(count.Value);
             }
+            visits = visits.OrderBy(v => v.StartDate);
 
-            return Visits;
+            return visits.Select(v => _mapper.Map<Visit>(v));
         }
 
 
         public IVisit GetById(int Id)
         {
-            VisitEntity v = _context.Visits.Include(vi => vi.Status).Where(vi => vi.Id == Id).FirstOrDefault();
+            VisitEntity v = Includify(_context.Visit)
+                .Where(vi => vi.Id == Id).FirstOrDefault();
             return _mapper.Map<Visit>(v);
+        }
+
+        private IQueryable<VisitEntity> Includify (IQueryable<VisitEntity> visitQuery)
+        {
+            return visitQuery.Include(vi => vi.StatusNavigation)
+                .Include(vi => vi.BuildingNavigation)
+                .Include(vi => vi.VisitedPersonNavigation)
+                .Include(vi => vi.CreatedByNavigation)
+                .Include(vi => vi.VisitVisitor)
+                .ThenInclude(vv => vv.VisitorNavigation);
         }
     }
 }

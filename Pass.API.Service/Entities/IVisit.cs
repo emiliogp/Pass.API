@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Pass.API.Interfaces.Entities
 {
@@ -13,5 +14,6 @@ namespace Pass.API.Interfaces.Entities
         IEmployee CreatedBy { get; set; }
         DateTime CreatedOn { get; set; }
         Boolean Deleted { get; set; }
+        IEnumerable<IVisitor> Visitors { get; set; }
     }
 }

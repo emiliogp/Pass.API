@@ -8,7 +8,7 @@ namespace Pass.API.Interfaces.Repositories
     public interface IEntityRepository<T>
     {        
 
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll(int? count);
 
         T GetById(int Id);
 

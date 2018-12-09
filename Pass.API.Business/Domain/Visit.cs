@@ -1,5 +1,6 @@
 ﻿using Pass.API.Interfaces.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace Pass.API.Business.Domain
 {
@@ -15,5 +16,6 @@ namespace Pass.API.Business.Domain
         public IEmployee CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
         public Boolean Deleted { get; set; }
+        public IEnumerable<IVisitor> Visitors { get; set; }
     }
 }

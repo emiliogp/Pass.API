@@ -22,9 +22,9 @@ namespace Pass.API.Controllers
 
         // GET: api/Buildings
         [HttpGet]
-        public IEnumerable<Building> Get()
+        public IEnumerable<Building> Get(int? count)
         {
-            return _repository.GetAll().Cast<Building>();
+            return _repository.GetAll(count).Cast<Building>();
         }
 
         // GET: api/Buildings/5
