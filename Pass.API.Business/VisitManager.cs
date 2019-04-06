@@ -19,27 +19,27 @@ namespace Pass.API.Business
         }
 
 
-        public IEnumerable<Employee> loadAllEmployees(int? count)
+        public IEnumerable<Employee> LoadAllEmployees(int? count)
         {
             return _employeeRepository.GetAll(count).Cast<Employee>();
         }
 
-        public Employee loadEmployeById(int id)
+        public Employee LoadEmployeeById(int id)
         {
             return (Employee) _employeeRepository.GetById(id);
         }
 
-        public IEnumerable<Employee> loadEmployeesByLastName(string lastName, int? count)
+        public IEnumerable<Employee> LoadEmployeesByLastName(string lastName, int? count)
         {
             return _employeeRepository.GetByLastName(lastName, count).Cast<Employee>();
         }
 
-        public IEnumerable<Visit> loadAllVisits(int? count)
+        public IEnumerable<Visit> LoadAllVisits(int? count)
         {
             return _visitRepository.GetAll(count).Cast<Visit>();
         }
 
-        public Visit loadVisitById(int id)
+        public Visit LoadVisitById(int id)
         {
             Visit visit = (Visit)_visitRepository.GetById(id);
             return visit;

@@ -24,21 +24,21 @@ namespace Pass.API.Web.Controllers
         [HttpGet]
         public IEnumerable<EmployeeDTO> Get(int? count)
         {
-            return _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDTO>>(_visitManager.loadAllEmployees(count));
+            return _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDTO>>(_visitManager.LoadAllEmployees(count));
         }
 
         //api/employees/lastName&count=10
         [HttpGet("{id:int}")]
         public EmployeeDTO GetById(int id)
         {
-            return _mapper.Map<EmployeeDTO>(_visitManager.loadEmployeById(id));
+            return _mapper.Map<EmployeeDTO>(_visitManager.LoadEmployeeById(id));
         }
 
         //api/employees/lastName&count=10
         [HttpGet("{lastName}")]
         public IEnumerable<EmployeeDTO> GetByLastName(string lastName, int? count)
         {
-            return _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDTO>>(_visitManager.loadEmployeesByLastName(lastName, count));
+            return _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDTO>>(_visitManager.LoadEmployeesByLastName(lastName, count));
         }
     }
 }

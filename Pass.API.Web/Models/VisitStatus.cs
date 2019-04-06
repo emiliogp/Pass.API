@@ -1,6 +1,4 @@
-﻿using Pass.API.Interfaces.Entities;
-
-namespace Pass.API.Web.Models
+﻿namespace Pass.API.Web.Models
 {
     public class VisitStatusDTO
     {

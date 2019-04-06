@@ -24,14 +24,14 @@ namespace Pass.API.Web.Controllers
         [HttpGet]
         public IEnumerable<VisitDTO> Get(int? count)
         {
-            return _mapper.Map<IEnumerable<Visit>, IEnumerable<VisitDTO>>(_visitManager.loadAllVisits(count));
+            return _mapper.Map<IEnumerable<Visit>, IEnumerable<VisitDTO>>(_visitManager.LoadAllVisits(count));
         }
 
         //api/visits/1
         [HttpGet("{id:int}")]
         public VisitDTO GetById(int id)
         {
-            Visit visit = _visitManager.loadVisitById(id);
+            Visit visit = _visitManager.LoadVisitById(id);
             return _mapper.Map<VisitDTO>(visit);
         }
     }
